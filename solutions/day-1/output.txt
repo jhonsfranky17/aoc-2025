@@ -1,0 +1,2 @@
+Total valid passwords at the end: 1120
+Total valid passwords including every click: 6554
