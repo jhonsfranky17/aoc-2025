@@ -4,10 +4,10 @@ public class SecretEntrance {
 
     public static void main(String[] args) {
         String filePath = "./input.txt";
-        int dialStart = 50;
+        int dialPos = 50;
         int count1 = 0, count2 = 0;
 
-        State state = new State(dialStart, count1, count2);
+        State state = new State(dialPos, count1, count2);
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath));
                 BufferedWriter bw = new BufferedWriter(new FileWriter("./output.txt"))) {
@@ -25,25 +25,25 @@ public class SecretEntrance {
     }
 
     static State findPassword(String input, State state) {
-        int dialStart = state.dial;
+        int dialPos = state.dial;
         int count1 = state.count1;
         int count2 = state.count2;
         int move = Integer.parseInt(input.substring(1));
 
         for (int i = 0; i < move; i++) {
             if (input.startsWith("L")) {
-                dialStart = (dialStart - 1 + 100) % 100;
+                dialPos = (dialPos - 1 + 100) % 100;
             } else {
-                dialStart = (dialStart + 1) % 100;
+                dialPos = (dialPos + 1) % 100;
             }
-            if (dialStart == 0) {
+            if (dialPos == 0) {
                 count2++;
             }
         }
-        if (dialStart == 0) {
+        if (dialPos == 0) {
             count1++;
         }
-        return new State(dialStart, count1, count2);
+        return new State(dialPos, count1, count2);
     }
 }
 
